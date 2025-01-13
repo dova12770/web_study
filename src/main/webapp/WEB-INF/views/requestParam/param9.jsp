@@ -12,7 +12,6 @@
 <!--  	<form method="post">-->
 <!-- 	<form action="/param9" method="post">-->
 	<form action="" method="post">
-		
 		id : <input type="text" name="id"><br/>
 		name : <input type="text" name="name"><br/>
 		price : <input type="text" name="price"><br/>

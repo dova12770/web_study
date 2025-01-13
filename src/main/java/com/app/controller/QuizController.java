@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/quiz")
+@RequestMapping("/quiz03")
 public class QuizController {
 
 		@RequestMapping("/main")
@@ -48,13 +48,39 @@ public class QuizController {
 			return "/quiz/req2";
 		}
 		
-		@RequestMapping("/req2")
-		public String req4(@RequestParam Map<String,String> reqMap) {
-			System.out.println("/quiz/req2 요청");
-			System.out.println(reqMap.get("data1"));
-			System.out.println(reqMap.get("data2"));
-			return "/quiz/req2";
-		}
+//		@RequestMapping("/req2")
+//		public String req4(@RequestParam Map<String,String> reqMap) {
+//			System.out.println("/quiz/req2 요청");
+//			System.out.println(reqMap.get("data1"));
+//			System.out.println(reqMap.get("data2"));
+//			return "/quiz/req2";
+//		}
+		
+//		@RequestMapping("/pathA")
+//		public String pathA(HttpServletRequest request) {
+//			System.out.println(request.getParameter("name"));
+//			System.out.println(request.getParameter("price"));
+//			return "/quiz03/pathA";
+//		}
+//		
+//		@RequestMapping("/pathB")
+//		public String pathB(HttpServletRequest request) {
+//			System.out.println(request.getParameter("name"));
+//			System.out.println(request.getParameter("price"));
+//			return "/quiz03/pathB";
+//		}
+//		@RequestMapping("/pathCommon/A")
+//		public String A(HttpServletRequest request) {
+//			System.out.println(request.getParameter("name"));
+//			System.out.println(request.getParameter("price"));
+//			return "/quiz03/pathCommon/A";
+//		}
+//		@RequestMapping("/pathCommon/B")
+//		public String B(HttpServletRequest request) {
+//			System.out.println(request.getParameter("name"));
+//			System.out.println(request.getParameter("price"));
+//			return "/quiz03/pathCommon/B";
+//		}
 		
 		
 }

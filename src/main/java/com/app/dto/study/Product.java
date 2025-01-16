@@ -1,10 +1,13 @@
-package com.app.dto;
+package com.app.dto.study;
 
-public class ProductRequestForm {
+public class Product {
 
 	public String id;
 	public String name;
 	public int price;
+	
+	//
+	//
 	
 	public String getId() {
 		return id;

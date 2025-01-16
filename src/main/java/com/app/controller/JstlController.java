@@ -123,4 +123,29 @@ public class JstlController {
 		return "jstl/listTest";
 	}
 	
+	@GetMapping("/jstl/listTest/{type}")
+	public String listTestPath(@RequestParam String type, Model model) {
+
+		if(type.equals("str")) {
+			model.addAttribute("msg","스트링 리스트입니다.");
+			
+			List<String> msgList = new ArrayList<String>();
+			for(int i=1; i<=10; i++)
+				msgList.add("스트링 리스트입니다.");
+			
+			model.addAttribute("msgList",msgList);
+		}
+		
+		if(type.equals("member")) {
+			List<Member> memberList = new ArrayList<Member>();
+			
+			for(int i=1; i<=5;i++) {
+				memberList.add(new Member("아이디"+i,"비번"+i,"이름"+i));
+			}
+			
+			model.addAttribute("memberList",memberList);
+		}
+		return "jstl/listTest";
+	}
+	
 }

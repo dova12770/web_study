@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>호실예약</title>
 </head>
 <body>
 	<h1>객식 추가</h1>
@@ -17,7 +17,7 @@
 		
 		<h4>뷰타입</h4>
 		
-		<select name=""viewType">
+		<select name="viewType">
 			<option value="OCN">오션뷰</option>
 			<option value="CTY">시티뷰</option>
 			<option value="MOT">마운틴뷰</option>

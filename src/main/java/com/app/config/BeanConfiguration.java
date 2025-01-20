@@ -33,4 +33,6 @@ public class BeanConfiguration {
 		//return new RoomServiceImpl(roomDAO);
 		return null;
 	}
+
+	
 }

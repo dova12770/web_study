@@ -15,11 +15,11 @@ public class UserDAOImpl implements UserDAO{
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-//	@Override
-//	public List<User> findUserList() {
-//		List<User> userList = sqlSessionTemplate.selectList("user_mapper.findUserList");
-//		return userList;
-//	}
+	@Override
+	public List<User> findUserList() {
+		List<User> userList = sqlSessionTemplate.selectList("user_mapper.findUserList");
+		return userList;
+	}
 	
 	@Override
 	public int addUser(User user) {

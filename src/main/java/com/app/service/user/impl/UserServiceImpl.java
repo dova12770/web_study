@@ -16,11 +16,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserDAO userDAO;
 
-//	@Override
-//	public List<User> findUserList() {
-//		List<User> userList = userDAO.findUserList();
-//		return userList;
-//	}
+	@Override
+	public List<User> findUserList() {
+		List<User> userList = userDAO.findUserList();
+		return userList;
+	}
 
 	@Override
 	public int addUser(User user) {

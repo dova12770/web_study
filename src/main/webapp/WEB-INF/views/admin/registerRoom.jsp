@@ -7,7 +7,7 @@
 <title>호실예약</title>
 </head>
 <body>
-	<h1>객식 추가</h1>
+	<h1>객실 추가</h1>
 	
 	<form action="" method="post">
 		<label>건물/동 번호<input type="text" name="buildingNumber"></label></br>
@@ -25,6 +25,7 @@
 		
 		<br>
 		<button type="submit">객실추가</button>
+		<button type="button" onClick="location.href='/admin/rooms'">객실 목록보기</button>
 	</form>
 </body>
 </html>

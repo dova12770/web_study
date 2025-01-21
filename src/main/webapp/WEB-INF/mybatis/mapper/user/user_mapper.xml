@@ -3,5 +3,16 @@
 
 <mapper namespace="user_mapper">
 
+	<insert id="addUser" parameterType="User">
+		insert into T_USER values ( #{id},
+									#{pw},
+									#{name},
+									#{userType} )
+	</insert>
+	
+	<select id="findUserList" resultType="User">
+		SELECT *
+		FROM T_USER
+	</select>
 
 </mapper>

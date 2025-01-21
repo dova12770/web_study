@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
+import com.app.dto.user.User;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
 
@@ -42,9 +43,6 @@ public class AdminController {
 		} else {
 			return "admin/registerRoom";
 		}
-		
-		
-		
 	}
 	
 	//관리자 객실 목록 확인
@@ -61,5 +59,20 @@ public class AdminController {
 	}
 	
 	//고객 관리/등록
+	@GetMapping("/admin/users/add")
+	public String add() {
+		return "admin/users/addUser";
+	}
 	
+	@PostMapping("/admin/users/add")
+	public String addAction(User user) {
+		System.out.println(user.toString());
+		
+		int result = userService.addUser(user);
+		//int result userService.saveCustomerUser(user);
+		System.out.println(result); 
+		
+			return "admin/users/addUser";
+		
+	}
 }

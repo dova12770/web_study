@@ -1,4 +1,4 @@
-package com.app.controller.customer;
+package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,25 +9,29 @@ import com.app.dto.user.User;
 import com.app.service.user.UserService;
 
 @Controller
-public class CustomerController {
+public class MainController {
 	
 	@Autowired
 	UserService userService;
+
+	@GetMapping("/main")
+	public String main() {
+		return "main";
+	}
 	
-	//회원가입
-	@GetMapping("/customer/signup")
-	public String signup() {
-		return "customer/signup";
+	@GetMapping("/")
+	public String root() {
+		return "redirect:/main";
 	}
-	@PostMapping("/customer/signup")
-	public String signupAction(User user) {
-		user.setUserType("CUS");
+	
+	@GetMapping("/joinMembership")
+	public String join() {
+		return "user/joinMemberShip";
+	}
+	@PostMapping("/joinMembership")
+	public String joinAction(User user) {
 		int result = userService.addUser(user);
-		
-		if(result > 0) {
-			return "redirect:/main";
-		} else {
-		return "customer/signup";
-		}
+		return "user/joinMemberShip";
 	}
+	
 }

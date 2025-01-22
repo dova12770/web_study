@@ -27,5 +27,9 @@
 		DELETE FROM T_ROOM
 		WHERE room_id = #{roomId}
 	</delete>
+	
+	<update id="">
+	
+	</update>
 
 </mapper>

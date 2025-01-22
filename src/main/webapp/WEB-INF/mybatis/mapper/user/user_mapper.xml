@@ -10,6 +10,17 @@
 									#{userType} )
 	</insert>
 	
+<!-- 	<insert id="addUser" parameterType="User"> -->
+<!-- 		insert into T_USER -->
+<!-- 		(id, pw, name, user_type)  -->
+<!-- 		values ( -->
+<!-- 			#{id}, -->
+<!-- 			#{pw}, -->
+<!-- 			#{name}, -->
+<!-- 			'CUS' -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
 	<select id="findUserList" resultType="User">
 		SELECT *
 		FROM T_USER

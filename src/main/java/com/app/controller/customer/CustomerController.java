@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.app.common.CommonCode;
 import com.app.dto.user.User;
 import com.app.service.user.UserService;
+import com.app.util.LoginManager;
 
 @Controller
 public class CustomerController {
@@ -50,12 +51,13 @@ public class CustomerController {
 		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		User loginUser = userService.checkUserLogin(user);
 		
-		if(loginUser ==null) {
+		if(loginUser == null) {
 			return "/customer/login";
 		} else {
 			//로그인 정보 맞아서 로그인 성공
 			//session.setAttribute("loginUser", loginUser);
-			session.setAttribute("loginUserId", loginUser.getId());
+			//session.setAttribute("loginUserId", loginUser.getId());
+			LoginManager.setSessionLogin(session, loginUser.getId());
 			
 			return "redirect:/main";
 		}
@@ -64,7 +66,8 @@ public class CustomerController {
 	
 	@GetMapping("/customer/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		LoginManager.logout(session);
+		//session.invalidate();
 		
 		return "redirect:/main";
 	}
@@ -73,10 +76,11 @@ public class CustomerController {
 	public String mypage(HttpSession session, Model model) {
 		
 		//session 에 loginUserId 값의 존재유무
-		if(session.getAttribute("loginUserId") != null) {	//로그인상태
-			
+		//if(session.getAttribute("loginUserId") != null) {	//로그인상태
+		if(LoginManager.isLogin(session)) {
 			//로그인되어있는 사용자의 정보를 보여주기
-			User user = userService.finduserById((String)session.getAttribute("loginUserId"));
+			//User user = userService.finduserById((String)session.getAttribute("loginUserId"));
+			User user = userService.finduserById(LoginManager.getLoginUserId(session));
 			model.addAttribute("user", user);
 			
 			return "customer/mypage";
@@ -85,9 +89,4 @@ public class CustomerController {
 		return "redirect:/customer/login";
 	}
 	
-	@PostMapping("/customer/mypage")
-	public String mypageAction(){
-		
-		return "customer/mypage";
-	}
 }

@@ -10,4 +10,6 @@ public interface UserDAO {
 	int addUser(User user);
 	
 	User finduserById(String id);
+	
+	public User checkUserLogin(User user);
 }

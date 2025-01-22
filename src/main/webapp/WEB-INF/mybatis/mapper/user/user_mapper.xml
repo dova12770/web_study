@@ -28,8 +28,14 @@
 
 
 	<select id="findUserById" resultType="User" parameterType="String">
-		select*
+		select *
 		FROM T_USER
 		WHERE id = #{id}
+	</select>
+	
+	<select id="checkUserLogin" resultType="User" parameterType="User">
+		select *
+		FROM T_USER
+		where id = #{id} AND pw = #{pw} AND user_type = #{userType}
 	</select>
 </mapper>

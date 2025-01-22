@@ -11,4 +11,8 @@ public interface UserService {
 	
 	int saveCustomerUser(User user);
 	int saveAdminUser(User user);
+	
+	User checkUserLogin(User user);
+	
+	User finduserById(String id);
 }

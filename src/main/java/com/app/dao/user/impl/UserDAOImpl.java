@@ -26,6 +26,14 @@ public class UserDAOImpl implements UserDAO{
 		int result = sqlSessionTemplate.insert("user_mapper.addUser",user);
 				return result;
 	}
+
+	@Override
+	public User finduserById(String id) {
+		
+		User user = sqlSessionTemplate.selectOne("user_mapper.findUserById", id);
+		
+		return user;
+	}
 	
 
 }

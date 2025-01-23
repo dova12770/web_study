@@ -5,11 +5,14 @@ import java.util.List;
 import com.app.dto.user.User;
 
 public interface UserDAO {
-	List<User> findUserList();
-
+	
 	int addUser(User user);
 	
-	User finduserById(String id);
+	List<User> findUserList();
+	
+	User findUserById(String id);
 	
 	public User checkUserLogin(User user);
+	
+	int modifyUser(User user);
 }

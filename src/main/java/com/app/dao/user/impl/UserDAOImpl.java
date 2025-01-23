@@ -16,20 +16,22 @@ public class UserDAOImpl implements UserDAO{
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List<User> findUserList() {
-		List<User> userList = sqlSessionTemplate.selectList("user_mapper.findUserList");
-		return userList;
-	}
-	
-	@Override
 	public int addUser(User user) {
 		int result = sqlSessionTemplate.insert("user_mapper.addUser",user);
 				return result;
 	}
 
 	@Override
-	public User finduserById(String id) {
+	public List<User> findUserList() {
 		
+		List<User> userList = sqlSessionTemplate.selectList("user_mapper.findUserList");
+		
+		return userList;
+	}
+
+	@Override
+	public User findUserById(String id) {
+
 		User user = sqlSessionTemplate.selectOne("user_mapper.findUserById", id);
 		
 		return user;
@@ -37,10 +39,17 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public User checkUserLogin(User user) {
-		
-		User loginUser = sqlSessionTemplate.selectOne("user_mapper.checkUserLogin",user);
+
+		User loginUser = sqlSessionTemplate.selectOne("user_mapper.checkUserLogin", user);
 		
 		return loginUser;
+	}
+
+	@Override
+	public int modifyUser(User user) {
+		
+		int result = sqlSessionTemplate.update("user_mapper.modifyUser",user);
+		return result;
 	}
 	
 

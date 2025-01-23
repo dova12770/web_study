@@ -12,6 +12,8 @@ public interface RoomService {
 	Room findRoomByRoomId(int roomId);
 	
 	int removeRoom(int roomId);
+	
+	int modifyRoom(Room room);
 }
 //impl 구현클래스
 

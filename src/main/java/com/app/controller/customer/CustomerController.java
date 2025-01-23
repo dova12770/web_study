@@ -80,7 +80,7 @@ public class CustomerController {
 		if(LoginManager.isLogin(session)) {
 			//로그인되어있는 사용자의 정보를 보여주기
 			//User user = userService.finduserById((String)session.getAttribute("loginUserId"));
-			User user = userService.finduserById(LoginManager.getLoginUserId(session));
+			User user = userService.findUserById(LoginManager.getLoginUserId(session));
 			model.addAttribute("user", user);
 			
 			return "customer/mypage";

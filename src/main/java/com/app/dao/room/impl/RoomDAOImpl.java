@@ -48,5 +48,13 @@ public class RoomDAOImpl implements RoomDAO{
 		int result = sqlSessionTemplate.delete("room_mapper.removeRoom",roomId);
 		return result;
 	}
+	
+	@Override
+	public int modifyRoom(Room room) {
+		
+		int result = sqlSessionTemplate.update("room_mapper.modifyRoom", room);
+		
+		return result;
+	}
 
 }

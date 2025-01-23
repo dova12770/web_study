@@ -1,41 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user_mapper">
 
-	<insert id="addUser" parameterType="User">
-		insert into T_USER values ( #{id},
-									#{pw},
-									#{name},
-									#{userType} )
-	</insert>
 	
-<!-- 	<insert id="addUser" parameterType="User"> -->
+<!-- 	<insert id="saveUser" parameterType="User"> -->
 <!-- 		insert into T_USER -->
-<!-- 		(id, pw, name, user_type)  -->
+<!-- 		(id, name, user_type)  -->
 <!-- 		values ( -->
 <!-- 			#{id}, -->
-<!-- 			#{pw}, -->
 <!-- 			#{name}, -->
 <!-- 			'CUS' -->
 <!-- 		) -->
 <!-- 	</insert> -->
 	
+	<insert id="saveUser" parameterType="User">
+		insert into T_USER
+		values (
+			#{id},
+			#{pw},
+			#{name},
+			#{userType}
+		)
+	</insert>
+	
 	<select id="findUserList" resultType="User">
-		SELECT *
-		FROM T_USER
+		select * from T_USER
 	</select>
-
-
+	
+	
 	<select id="findUserById" resultType="User" parameterType="String">
 		select *
 		FROM T_USER
-		WHERE id = #{id}
+		WHERE id = #{id}	
 	</select>
 	
 	<select id="checkUserLogin" resultType="User" parameterType="User">
 		select *
-		FROM T_USER
+		from T_USER
 		where id = #{id} AND pw = #{pw} AND user_type = #{userType}
 	</select>
+	
+	<update id="modifyUser" parameterType="User">
+		UPDATE T_USER
+		SET
+		pw=#{pw},
+		name=#{name},
+		user_type=#{userType}
+		WHERE id = #{id}
+	</update>
 </mapper>

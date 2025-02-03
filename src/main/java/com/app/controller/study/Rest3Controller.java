@@ -118,7 +118,7 @@ public class Rest3Controller {
 		
 		header.setResultCode(ApiCommonCode.API_RESULT_SUCCESS);
 		header.setResultMessage(ApiCommonCode.API_RESULT_SUCCESS_MSG);
-		res.setHeader(header);
+		res.setHeader(header);           
 		
 		User user= new User();
 		user.setId("abc");

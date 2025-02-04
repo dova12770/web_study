@@ -65,6 +65,7 @@ public class CustomerController {
 		
 	//return "ok dupcheckid";
 	}
+
 	@ResponseBody
 	@RequestMapping("/customer/checkDupIdJson")
 	public ApiResponse<String> checkDupIdJson(@RequestBody UserDupCheck userDupCheck) {

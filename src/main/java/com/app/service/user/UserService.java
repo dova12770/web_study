@@ -22,5 +22,13 @@ public interface UserService {
 	
 	List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition);
 	
+	/**
+	 * 아이디 중복여부 체크
+	 * @param id 중복여부를 확인하고자 하는 User id
+	 * @return 중복여부(true:중복, false:사용가능)
+	 * 
+	 * 사용예시) boolean isDup = isDuplicatedId
+	 * 			if(isDup){...}
+	 */
 	boolean isDuplicatedId(String id);
 }

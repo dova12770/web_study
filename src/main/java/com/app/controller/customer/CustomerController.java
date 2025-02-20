@@ -1,24 +1,42 @@
 package com.app.controller.customer;
 
+import java.io.File;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.app.common.ApiCommonCode;
 import com.app.common.CommonCode;
 import com.app.dto.api.ApiResponse;
 import com.app.dto.api.ApiResponseHeader;
+import com.app.dto.user.ProfileRequestForm;
 import com.app.dto.user.User;
 import com.app.dto.user.UserDupCheck;
+import com.app.dto.user.UserValidError;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
+import com.app.validator.USerCustomValidator;
+import com.app.validator.UserValidator;
+
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 public class CustomerController {
@@ -33,7 +51,46 @@ public class CustomerController {
 	}
 
 	@PostMapping("/customer/signup")
-	public String signupAction(User user) {
+	public String signupAction(/*@Valid*/ @ModelAttribute User user, BindingResult br, Model model) {
+		
+		//별도로 생성한 UserValidError 객체 사용하는 케이스
+		UserValidError userVailderror = new UserValidError();
+		boolean validResult = USerCustomValidator.validate(user, userVailderror);
+		
+		if(validResult == false) {//뭔가 걸림
+			//유효성 검증 통과 실패
+			//저장 진행중지 후 다시 가입페이지로 이동
+			model.addAttribute("userVaildError", userVailderror);
+			return "customer/signup";
+		}
+		
+		
+		/*
+		 //BindingResult (Errors) 사용하는 케이스
+		//유효성검증!
+		USerCustomValidator.validate(user, br);
+		
+		//유효성 검즌ㅇ 성고 여부                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+		if(br.hasErrors()) {
+			List<ObjectError> errorList = br.getAllErrors();
+			for(ObjectError er : errorList) {
+				System.out.println(er.getObjectName());
+				System.out.println(er.getDefaultMessage());
+				System.out.println(er.getCode());
+				System.out.println(er.getCodes()[0]);
+			}
+			
+			return "customer/signup";
+		}
+		*/
+//		@InitBinder("user")
+//		public void initUserBinder(WebDataBinder binder) {
+//			UserValidator validator = new UserValidator();
+//			binder.addValidater(validator);
+//		}
+		
+		
+		
 		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		int result = userService.addUser(user);
 
@@ -148,6 +205,55 @@ public class CustomerController {
 		}
 		// 로그인 안된 상태
 		return "redirect:/customer/login";
+	}
+	
+	/*
+	@PostMapping("/customer/profile")
+	public String profileAction(HttpServletRequest request, MultipartRequest multipartRequest) {
+		
+		System.out.println(request.getParameter("id"));
+		System.out.println(request.getParameter("name"));
+		
+		MultipartFile file = multipartRequest.getFile("profileImage");
+		
+		System.out.println(file.getName());
+		System.out.println(file.getOriginalFilename());
+		System.out.println(file.isEmpty());
+		System.out.println(file.getContentType());
+		System.out.println(file.getSize());
+		
+		return "redirect:/customer/mypage";
+	}
+	*/
+	@PostMapping("/customer/profile")
+	public String profileAction(ProfileRequestForm profileRequestForm) {
+		
+		System.out.println(profileRequestForm.getId());
+		System.out.println(profileRequestForm.getName());
+		
+		MultipartFile file = profileRequestForm.getProfileImage();
+		//첨부파일 수신
+		
+		//정보확인
+		System.out.println(file.getName());
+		System.out.println(file.getOriginalFilename());
+		System.out.println(file.isEmpty());
+		System.out.println(file.getContentType());
+		System.out.println(file.getSize());
+		
+		//1. 파일자체 저장
+		/*
+		//자체 저장
+		try {
+		file.transferTo(new File("d:/fileStorage/"+ file.getOriginalFilename()));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		*/
+		//2. 파일 정보를 DB에 저장
+		
 
+		
+		return "redirect:/customer/mypage";
 	}
 }

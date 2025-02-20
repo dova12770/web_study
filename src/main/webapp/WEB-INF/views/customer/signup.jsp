@@ -1,27 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.error-msg{
+		color:red
+	}
+</style>
 </head>
 <body>
 	<h1>회원가입</h1>
-		
-		<form action="" method="post">
+
+	<form action="" method="post">
 		<label>아이디<input type="text" name="id" id="inputId"></label></br>
+		<spring:hasBindErrors name="user">
+		<c:if test="${errors.hasFieldErrors('id')}">
+			<p class="error-msg">아이디 필수로 입력하세요</p>
+		</c:if>
+		</spring:hasBindErrors>
+		
+		<c:if test="${userVaildError.id!=null}" }>
+			<p class="error-msg">$userVaildError.id}</p>
+		</c:if>
+		
 		<button type="button" id="btn_checkDupId">중복체크</button>
-		<span id="checkDupMsg"></span>
-		</br>
+		<span id="checkDupMsg"></span> </br> 
+		
 		<label>비밀번호<input type="text" name="pw"></label></br>
-		<label>이름<input type="text" name="name"></label></br>
+		<spring:hasBindErrors name="user">
+		<c:if test="${errors.hasFieldErrors('id')}">
+			<p class="error-msg">비밀번호는 8자리에서 12자기로 입력하세요</p>
+			<p class="error-msg">${errors.getFeild}
+		</c:if>
+		</spring:hasBindErrors>
+			
+			 <label>이름<input type="text" name="name"></label></br>
 		<br>
 		<button type="submit">회원가입</button>
-		</form>
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script>
+	</form>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
 			let btn_checkDupId = document.getElementById('btn_checkDupId');
 			let span_checkDupMsg= document.getElementById('checkDupMsg');
 			

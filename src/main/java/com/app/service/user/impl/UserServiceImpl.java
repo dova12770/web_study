@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService{
 		//관리자 추가 전 검증 로직
 		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
 		int result = userDAO.addUser(user);
+		//로그생각보다 중요하니 남길것
 		return result;
 	}
 

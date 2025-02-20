@@ -3,6 +3,9 @@ package com.app.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LoginManager {
 
 	public static final String SESSION_LOGIN_KEY = "loginUserId";

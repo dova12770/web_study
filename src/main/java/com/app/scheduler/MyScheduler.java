@@ -12,8 +12,8 @@ public class MyScheduler {
 	
 	@Autowired
 	UserService userService;
-	@Scheduled(cron = "0/5 * * * * *")
-	//@Scheduled(cron = "0 0 3 * * *")
+	//@Scheduled(cron = "0/5 * * * * *")
+	@Scheduled(cron = "0 0 3 * * *")
 	public void schduler() {
 		System.out.println("schedule " + LocalDate.now());
 		
